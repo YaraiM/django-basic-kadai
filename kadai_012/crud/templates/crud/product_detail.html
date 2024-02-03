@@ -1,0 +1,30 @@
+<!-- このhtmlファイル名はListViewクラスを利用する場合のデフォルトTemplate名「Model名（product）_list.html」に合わせている -->
+<!-- Templateを指定したい場合は、views.pyファイルでtemplate_nameを指定する -->
+{% extends "base.html" %}
+
+{% block title %}商品詳細{% endblock %}
+{% block content %}
+<h1>商品詳細</h1>
+<!-- urls.pyでname="new"とルーティングしているので、'new'とする -->
+<table class="table table-striped table-hover table-bordered">
+    <thead>
+        <tr>
+            <th>商品名</th>
+            <th>価格</th>
+            <th>カテゴリ</th>
+            <th>商品説明</th>
+            <th>画像</th>
+        </tr>
+    </thead>
+    <!-- views.pyでListViewクラスを継承したクラスはTemplate側で「object_list」という名前で渡される -->
+    <!-- object_list以外の任意の名前にしたい場合は、views.pyでcontext_object_nameに名前を指定する -->
+    <tr>
+        <td>{{ product.name }}</td>
+        <td>{{ product.price}} 円</td>
+        <td>{{ product.category }}</td>
+        <td>{{ product.description }}</td>
+        <td><img src="{{ product.img.url }}" style="width: 100px height:auto;"></td>
+    </tr>
+</table>
+<a href="{% url 'list' %}">戻る</a>
+{% endblock %}
